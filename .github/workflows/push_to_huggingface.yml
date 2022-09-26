@@ -12,8 +12,10 @@ jobs:
     steps:
       - name: Checkout repository
         uses: actions/checkout@v2
-      
-      - name: Push to hub
+        with:
+          fetch-depth: 0
+
+      - name: Push to hub main branch of huggingface.co/datasets/osbm/zenodo
         env:
           HF_TOKEN: ${{ secrets.HF_TOKEN }}
         run: git push https://osbm:$HF_TOKEN@huggingface.co/datasets/osbm/zenodo main
