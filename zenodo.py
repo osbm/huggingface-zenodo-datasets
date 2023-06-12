@@ -36,25 +36,18 @@ class NewDataset(datasets.GeneratorBasedBuilder):
 
         url = f"https://zenodo.org/record/{self.zenodo_id}/files/{self.filename}"
 
-        data_dir = dl_manager.download([url])
+        filepath = dl_manager.download([url])[0]        
+        shutil.copy(filepath, os.getcwd())
+        os.rename(os.path.basename(filepath), self.filename)
+        
         return [
             datasets.SplitGenerator(
                 name=datasets.Split.TRAIN,
                 gen_kwargs={
-                    "filepath": data_dir[0],
+                    "filepath": filepath,
                 },
             ),
         ]
 
-    def _generate_examples(self, filepath):
-        # lets rename the file to the original name
-        # copy file to the current directory without os specific commands
-        current_directory = os.getcwd()
-
-        # os.system(f"cp {filepath} .")
-        # os.system(f"mv {os.path.basename(filepath)} {self.filename}")
-        shutil.copy(filepath, current_directory)
-        os.rename(os.path.basename(filepath), self.filename)
-
-
+    def _generate_examples(self):
         yield 0, {"path": filepath}
