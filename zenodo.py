@@ -35,7 +35,7 @@ class NewDataset(datasets.GeneratorBasedBuilder):
 
         url = f"https://zenodo.org/record/{zenodo_id}/files/{filename}"
 
-        data_dir = dl_manager.download_and_extract([url])
+        data_dir = dl_manager.download([url])
         return [
             datasets.SplitGenerator(
                 name=datasets.Split.TRAIN,
