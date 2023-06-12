@@ -1,7 +1,7 @@
 ---
-
-
+pretty_name: Download Zenodo Datasets
 ---
+
 # download zenodo datasets using huggingface datasets
 
 ```python
