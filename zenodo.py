@@ -2,8 +2,9 @@
 Huggingface datasets script for Zenodo dataset.
 """
 
-import json
 import os
+import shutil
+import json
 
 import datasets
 
@@ -48,8 +49,12 @@ class NewDataset(datasets.GeneratorBasedBuilder):
     def _generate_examples(self, filepath):
         # lets rename the file to the original name
         # copy file to the current directory without os specific commands
-        os.system(f"cp {filepath} .")
-        os.system(f"mv {os.path.basename(filepath)} {self.filename}")
+        current_directory = os.getcwd()
+
+        # os.system(f"cp {filepath} .")
+        # os.system(f"mv {os.path.basename(filepath)} {self.filename}")
+        shutil.copy(filepath, current_directory)
+        os.rename(os.path.basename(filepath), self.filename)
 
 
         yield 0, {"path": filepath}
