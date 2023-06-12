@@ -49,7 +49,7 @@ class NewDataset(datasets.GeneratorBasedBuilder):
         # lets rename the file to the original name
         # copy file to the current directory without os specific commands
         os.system(f"cp {filepath} .")
-        os.system(f"mv {self.filename} {self.filename.split('.')[0]}")
+        os.system(f"mv {os.path.basename(filepath)} {self.filename}")
 
 
         yield 0, {"path": filepath}
