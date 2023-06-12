@@ -96,14 +96,16 @@ class NewDataset(datasets.GeneratorBasedBuilder):
         return [
             datasets.SplitGenerator(
                 name=datasets.Split.TRAIN,
-                data_dir=data_dir[0],
+                gen_kwargs={
+                    "filepath": data_dir[0],
+                },
             ),
         ]
 
     # method parameters are unpacked from `gen_kwargs` as given in `_split_generators`
-    def _generate_examples(self, data_dir):
+    def _generate_examples(self, filepath):
         # TODO: This method handles input defined in _split_generators to yield (key, example) tuples from the dataset.
         # The `key` is for legacy reasons (tfds) and is not important in itself, but must be unique for each example.
         
-        yield "path", data_dir
+        yield "path", filepath
         
