@@ -87,8 +87,8 @@ class NewDataset(datasets.GeneratorBasedBuilder):
         # dl_manager is a datasets.download.DownloadManager that can be used to download and extract URLS
         # It can accept any type or nested list/dict and will give back the same structure with the url replaced with path to local files.
         # By default the archives will be extracted and a path to a cached folder where they are extracted is returned instead of the archive
-        zenodo_id = self.config.name.split("/")[0]
-        filename = self.config.name.split("/")[1]
+        zenodo_id = self.config.name.split("_")[0]
+        filename = self.config.name.split("_")[1]
 
         url = f"https://zenodo.org/record/{zenodo_id}/files/{filename}"
 
