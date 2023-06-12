@@ -30,12 +30,12 @@ class NewDataset(datasets.GeneratorBasedBuilder):
         )
 
     def _split_generators(self, dl_manager):
-        zenodo_id = self.config.name.split("_")[0]
-        filename = self.config.name.split("_")[1]
+        self.zenodo_id = self.config.name.split("_")[0]
+        self.filename = self.config.name.split("_")[1]
 
-        url = f"https://zenodo.org/record/{zenodo_id}/files/{filename}"
+        url = f"https://zenodo.org/record/{self.zenodo_id}/files/{self.filename}"
 
-        data_dir = dl_manager.download([url])
+        data_dir = dl_manager.download(url)
         return [
             datasets.SplitGenerator(
                 name=datasets.Split.TRAIN,
