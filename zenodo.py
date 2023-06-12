@@ -39,7 +39,7 @@ class NewDataset(datasets.GeneratorBasedBuilder):
         filepath = dl_manager.download([url])[0]        
         shutil.copy(filepath, os.getcwd())
         os.rename(os.path.basename(filepath), self.filename)
-        
+
         return [
             datasets.SplitGenerator(
                 name=datasets.Split.TRAIN,
@@ -49,5 +49,5 @@ class NewDataset(datasets.GeneratorBasedBuilder):
             ),
         ]
 
-    def _generate_examples(self):
+    def _generate_examples(self, filepath):
         yield 0, {"path": filepath}
